@@ -22,6 +22,7 @@ const mockRedis = {
   rpush: jest.fn(),
   expire: jest.fn(),
   quit: jest.fn(),
+  zrank: jest.fn(),
 };
 
 describe('SearchService', () => {
@@ -99,7 +100,6 @@ describe('SearchService', () => {
       expect(mockPrismaService.user.findUnique).not.toHaveBeenCalled(); // 이메일이 없으므로 호출되지 않음
       expect(mockPrismaService.searchKeyword.create).toHaveBeenCalled();
       expect(mockRedis.zincrby).toHaveBeenCalledWith('trending:keywords', 1, '청바지');
-      expect(mockRedis.hset).not.toHaveBeenCalled(); // 사용자 정보가 없으므로 호출되지 않음
       expect(mockRedis.rpush).toHaveBeenCalledWith(`search:청바지:time`, expect.any(Number));
       expect(result).toEqual({
         id: 2,

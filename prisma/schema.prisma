@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+enum Region {
+  SEOUL
+  BUSAN
+  DAEGU
+  INCHEON
+  GWANGJU
+  DAEJEON
+  ULSAN
+  SEJONG
+  GYEONGGI
+  GANGWON
+  CHUNGBUK
+  CHUNGNAM
+  JEONBUK
+  JEONNAM
+  GYEONGBUK
+  GYEONGNAM
+  JEJU
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  email          String          @unique
+  userName       String?
+  gender         Gender
+  region         Region
+  age            Int
+  searchKeywords SearchKeyword[]
+  createdAt      DateTime        @default(now())
+}
+
+model SearchKeyword {
+  id        Int      @id @default(autoincrement())
+  keyword   String
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  gender    Gender?
+  region    Region?
+  age       Int?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([keyword])
+}

@@ -1,6 +1,8 @@
-import { Controller, Get, Post, Body, Param, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Request, Query } from '@nestjs/common';
 import { SearchService } from './search.service';
 import { CreateSearchDto } from './dto/create-search.dto';
+import { FilterSearchDto } from './dto/filter-search.dto';
+
 
 @Controller()
 export class SearchController {
@@ -12,14 +14,8 @@ export class SearchController {
     return this.searchService.saveKeyword(createSearchDto);
   }
 
-  @Get()
-  findAll() {
-    return this.searchService.findAll();
+  @Get("/trending")
+  findTrendingKeywords(@Query() filterSearchDto: FilterSearchDto) {
+    return this.searchService.findTrendingKeywords(filterSearchDto);
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.searchService.findOne(+id);
-  }
-
 }

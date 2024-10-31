@@ -51,6 +51,7 @@ model SearchKeyword {
   gender    Gender?
   region    Region?
   age       Int?
+  ip        String?
   createdAt DateTime @default(now())
 
   @@index([createdAt])

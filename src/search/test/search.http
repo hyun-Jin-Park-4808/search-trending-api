@@ -1,0 +1,16 @@
+### 검색어 저장하기 
+POST http://localhost:3000/api/search/keywords HTTP/1.1
+Content-Type: application/json
+
+{
+  "keyword": "청바지"
+}
+
+### 검색어 저장하기, 유저 존재
+POST http://localhost:3000/api/search/keywords HTTP/1.1
+Content-Type: application/json
+
+{
+  "keyword": "청바지",
+  "email": "test@email.com"
+}

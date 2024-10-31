@@ -6,7 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix('apis/search')
+  app.setGlobalPrefix('api/search')
 
   const config = new DocumentBuilder()
   .setTitle('Search Trending API Documentation')

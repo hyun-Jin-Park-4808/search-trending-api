@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-ioredis';
 import { SearchModule } from './search/search.module';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SearchModule } from './search/search.module';
     SearchModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
+  exports: [PrismaService]
 })
 export class AppModule {}
